@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "916875891851",
+    "firebase_url": "https://administrationconsolle.firebaseio.com",
+    "project_id": "administrationconsolle",
+    "storage_bucket": "administrationconsolle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916875891851:android:b0177438926d3de2",
+        "android_client_info": {
+          "package_name": "com.bingerdranch.android.administrationconsolle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916875891851-gkes2gj3i1vj5e4reugqfi64k0f8hdgp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bingerdranch.android.administrationconsolle",
+            "certificate_hash": "f0708e3b3509553e18f32dcaec283ef465289002"
+          }
+        },
+        {
+          "client_id": "916875891851-4mlnog405kbcm9ra0lhl5at7h5r6r0a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqZ1EGtqDVtLvhrbzo07KZ9CKNroCn-iw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916875891851-4mlnog405kbcm9ra0lhl5at7h5r6r0a3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916875891851:android:4758269dbdcd1ff9",
+        "android_client_info": {
+          "package_name": "com.bingerdranch.android.bestautoservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916875891851-kdsvomgqq9c42fqllh1qa55uqfd79fb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bingerdranch.android.bestautoservice",
+            "certificate_hash": "f0708e3b3509553e18f32dcaec283ef465289002"
+          }
+        },
+        {
+          "client_id": "916875891851-4mlnog405kbcm9ra0lhl5at7h5r6r0a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqZ1EGtqDVtLvhrbzo07KZ9CKNroCn-iw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916875891851-4mlnog405kbcm9ra0lhl5at7h5r6r0a3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

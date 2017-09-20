@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_2"
+    android:orientation="vertical"
+    tools:context="com.bingerdranch.android.bestautoservice.MainActivity">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:text="@string/main"
+                android:textSize="25sp"
+                android:layout_margin="10sp"
+                android:textColor="#ae0000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/PB"/>
+        </TableRow>
+    <ListView
+        android:dividerHeight="10sp"
+        android:layout_margin="10sp"
+        android:id="@+id/list_view"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+    <Button
+        android:id="@+id/search_activity"
+        android:text="@string/button_search"
+        android:background="@drawable/shape_item_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"/>
+</LinearLayout>

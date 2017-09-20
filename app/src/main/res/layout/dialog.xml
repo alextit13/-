@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableRow
+        android:layout_margin="10sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/zv_1"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rating_empty"/>
+        <ImageView
+            android:id="@+id/zv_2"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rating_empty"/>
+        <ImageView
+            android:id="@+id/zv_3"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rating_empty"/>
+        <ImageView
+            android:id="@+id/zv_4"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rating_empty"/>
+        <ImageView
+            android:id="@+id/zv_5"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rating_empty"/>
+    </TableRow>
+    <EditText
+        android:layout_margin="10sp"
+        android:id="@+id/edit_text_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_otziv"/>
+</LinearLayout>

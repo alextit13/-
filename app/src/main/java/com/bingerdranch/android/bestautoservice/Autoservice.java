@@ -1,5 +1,7 @@
 package com.bingerdranch.android.bestautoservice;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
@@ -8,7 +10,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Autoservice {
+import java.io.Serializable;
+
+public class Autoservice implements Serializable{
     private String name;
     private String marka;
     private String model;
@@ -44,6 +48,23 @@ public class Autoservice {
         this.otzivi = otzivi;
         this.reiting = reiting;
         this.numOfRating = numOfRating;
+    }
+
+    protected Autoservice(Parcel in) {
+        name = in.readString();
+        marka = in.readString();
+        model = in.readString();
+        number = in.readString();
+        okrug = in.readString();
+        rayon = in.readString();
+        metro = in.readString();
+        adress = in.readString();
+        vid_rabot = in.readString();
+        otzivi = in.readString();
+        reiting = in.readString();
+        X = in.readDouble();
+        Y = in.readDouble();
+        numOfRating = in.readInt();
     }
 
     public String getName() {

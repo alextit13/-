@@ -22,4 +22,8 @@
     <string name="open_on_the_map">Открыть на карте</string>
     <string name="title_activity_maps">Map</string>
     <string name="error_permission_map">Ашыбачка</string>
+    <string name="search_autoservice_text">Поиск автосервиса</string>
+    <string name="search_autoservices_button_text">Найти автосервисы</string>
+    <string name="find_button_text">Найти</string>
+    <string name="text_find">Поиск автосервиса</string>
 </resources>

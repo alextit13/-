@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<Autoservice> {
@@ -57,6 +59,7 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null){
+            autoservice = getItem(position);
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_adapter,parent,false);
         }
 
@@ -66,7 +69,7 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         TextView adress = (TextView)convertView.findViewById(R.id.adress);
 
         final TextView image_view_add_otziv = (TextView) convertView.findViewById(R.id.image_view_add_otziv);
-        autoservice = getItem(position);
+
         tv_name.setText(autoservice.getName());
         adress.setText(autoservice.getAdress());
         image_view_add_otziv.setText("Добавить отзыв " + autoservice.getName()+"");
@@ -85,7 +88,6 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
 
             }
         });
-        Log.d(MainActivity.LOG_TAG,"rootView 2 = " +rating);
         image_view_add_otziv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,10 +119,6 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         rating_3 = (ImageView) convert.findViewById(R.id.rating_3);
         rating_4 = (ImageView) convert.findViewById(R.id.rating_4);
         rating_5 = (ImageView) convert.findViewById(R.id.rating_5);
-
-        if (ITOG_RATING!=0){
-            rating_to_settings = ITOG_RATING+"";
-        }
 
         switch (rating_to_settings){
             case "0":
@@ -242,8 +240,8 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         final int rating_int = Integer.parseInt(rating);
         String final_rating = "";
         DatabaseReference database = mFirebaseDatabase.getReference().child(text).child("numOfRating");
-        Log.d(MainActivity.LOG_TAG,"numZv = "+numZv); // тут то что мы нажали - сколько рейтинга дали
-        Log.d(MainActivity.LOG_TAG,"rating_int = " + rating_int); // тут сколькорейтинга есть - средний рейтинг
+        //Log.d(MainActivity.LOG_TAG,"numZv = "+numZv); // тут то что мы нажали - сколько рейтинга дали
+        //Log.d(MainActivity.LOG_TAG,"rating_int = " + rating_int); // тут сколькорейтинга есть - средний рейтинг
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -259,7 +257,7 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
 
             }
         });
-        Log.d(MainActivity.LOG_TAG,ITOG_RATING+"");
+        //Log.d(MainActivity.LOG_TAG,ITOG_RATING+"");
         return ITOG_RATING+"";
     }
 }

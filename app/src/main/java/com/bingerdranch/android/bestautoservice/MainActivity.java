@@ -45,21 +45,26 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter = new CustomAdapter(this,R.layout.item_adapter,list);
         list_view.setAdapter(adapter);
-
-        for (int i = 0; i<list.size();i++){
-            Log.d(LOG_TAG,list.get(i).getName());
-        }
-
-
         list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Log.d(LOG_TAG,"view id = " + list.get(position).getName());
+                clickItem(position);
             }
         });
     }
 
     private void clickItem(int position) {
-
+        Intent intent = new Intent(MainActivity.this,Item.class);
+        intent.putExtra("name",list.get(position).getName());
+        intent.putExtra("marka",list.get(position).getMarka());
+        intent.putExtra("model",list.get(position).getModel());
+        intent.putExtra("okrug",list.get(position).getOkrug());
+        intent.putExtra("rayon",list.get(position).getRayon());
+        intent.putExtra("metro",list.get(position).getMetro());
+        intent.putExtra("adress",list.get(position).getAdress());
+        intent.putExtra("number",list.get(position).getNumber());
+        intent.putExtra("vid_rabot",list.get(position).getVid_rabot());
+        intent.putExtra("otzivi",list.get(position).getOtzivi());
+        startActivity(intent);
     }
 }

@@ -42,15 +42,12 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        if (convertView == null){
-            tv_name = (TextView)convertView.findViewById(R.id.text_name);
-            adress = (TextView)convertView.findViewById(R.id.adress);
-            autoservice = getItem(position);
-            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_adapter,parent,false);
-            tv_name.setText(autoservice.getName());
-            adress.setText(autoservice.getAdress());
-        }
+        autoservice = getItem(position);
+        convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_adapter,parent,false);
+        tv_name = (TextView)convertView.findViewById(R.id.text_name);
+        adress = (TextView)convertView.findViewById(R.id.adress);
+        tv_name.setText(autoservice.getName());
+        adress.setText(autoservice.getAdress());
         return convertView;
     }
 }

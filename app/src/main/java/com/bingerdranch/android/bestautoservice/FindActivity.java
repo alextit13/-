@@ -8,7 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +27,8 @@ public class FindActivity extends AppCompatActivity {
 
     private ArrayList<Autoservice> list;
     private Button find_button;
+
+    private ProgressBar progress_bar;
 
     private Spinner sp_1;
     private Spinner sp_2;
@@ -47,14 +58,24 @@ public class FindActivity extends AppCompatActivity {
     private String metro = "";
     private String vid_rabot = "";
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private Autoservice autoservice;
+    private ChildEventListener mChildEventListeber;
+    private CustomAdapter customAdapter;
+
+    private LinearLayout container;
+
+    private long countListData = 0;
+
+    private ArrayList<Autoservice> find_list_autoservices;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
         init();
         downloadData();
-        updateAdapters();
-        refreshAdapter();
     }
 
     private void init() {
@@ -75,6 +96,9 @@ public class FindActivity extends AppCompatActivity {
         list_metro = new ArrayList<>();
         list_vid_rabot = new ArrayList<>();
 
+        container = (LinearLayout)findViewById(R.id.container);
+        container.setAlpha(0.3f);
+
         find_button = (Button) findViewById(R.id.button_find);
         find_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,12 +106,66 @@ public class FindActivity extends AppCompatActivity {
                 findLogic();
             }
         });
-
+        progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
+        progress_bar.setVisibility(View.VISIBLE);
     }
 
     private void downloadData() {
-        Intent intent = getIntent();
-        list = (ArrayList<Autoservice>) intent.getSerializableExtra("list");
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Log.d(MainActivity.LOG_TAG,"dataSnapshot.getChildrenCount() = "+ dataSnapshot.getChildrenCount());
+                countListData = dataSnapshot.getChildrenCount();
+
+                if (mChildEventListeber == null){
+                    mChildEventListeber = new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            autoservice = dataSnapshot.getValue(Autoservice.class);
+                            list.add(autoservice);
+                            //Log.d(MainActivity.LOG_TAG,"countListData = "+ countListData);
+                            if (list.size()==countListData){
+                                confirmList();
+                                progress_bar.setVisibility(View.GONE);
+                                container.setAlpha(1f);
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+                    mDatabaseReference.addChildEventListener(mChildEventListeber);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void confirmList(){
 
         for (int i = 0; i<list.size();i++){
             //Log.d(MainActivity.LOG_TAG,"list = "+ list.get(i).getName());
@@ -115,6 +193,7 @@ public class FindActivity extends AppCompatActivity {
         list_metro.clear();
         list_metro.addAll(hash_metro);
 
+        updateAdapters();
     }
 
     private void updateAdapters() {
@@ -201,6 +280,7 @@ public class FindActivity extends AppCompatActivity {
         hash_vid_rabot.addAll(list_vid_rabot);
         list_vid_rabot.clear();
         list_vid_rabot.addAll(hash_vid_rabot);
+        refreshAdapter();
     }
 
     private void refreshAdapter() {
@@ -219,6 +299,9 @@ public class FindActivity extends AppCompatActivity {
         sp_6.setAdapter(adapter_vid_rabot);
     }
 
+
+    // ниже расположен стек поисковой логики
+
     private void findLogic() {
         marka = sp_1.getSelectedItem().toString();
         model = sp_2.getSelectedItem().toString();
@@ -227,8 +310,36 @@ public class FindActivity extends AppCompatActivity {
         metro = sp_5.getSelectedItem().toString();
         vid_rabot = sp_6.getSelectedItem().toString();
 
+        generatorFindList();
+
+
+    }
+
+    private void generatorFindList() {
+
+        find_list_autoservices = new ArrayList<>();
+
+        for (int i = 0;i<list.size();i++){
+            if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
+                    list.get(i).getOkrug().contains(okrug)&&list.get(i).getRayon().contains(rayon)&&
+                    list.get(i).getVid_rabot().contains(vid_rabot)){
+                find_list_autoservices.add(list.get(i));
+            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
+                    list.get(i).getRayon().contains(rayon)&& list.get(i).getVid_rabot().contains(vid_rabot)){
+                find_list_autoservices.add(list.get(i));
+            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
+                    list.get(i).getVid_rabot().contains(vid_rabot)){
+                find_list_autoservices.add(list.get(i));
+            }
+        }
+
+        HashSet<Autoservice> hashAutoservices = new HashSet<>();
+        hashAutoservices.addAll(find_list_autoservices);
+        find_list_autoservices.clear();
+        find_list_autoservices.addAll(hashAutoservices);
+
         Intent intent = new Intent(FindActivity.this,MainActivity.class);
-        intent.putExtra("test","test");
+        intent.putExtra("list",find_list_autoservices);
         startActivity(intent);
     }
 }

@@ -72,7 +72,7 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
 
         tv_name.setText(autoservice.getName());
         adress.setText(autoservice.getAdress());
-        image_view_add_otziv.setText("Добавить отзыв " + autoservice.getName()+"");
+        /*image_view_add_otziv.setText("Добавить отзыв " + autoservice.getName()+"");
 
         DatabaseReference d = mFirebaseDatabase.getReference().child(getItem(position).getName()).child("rating");
         final View finalConvertView = convertView;
@@ -108,11 +108,11 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
                 });
                 clickAddOtziv(getItem(position));
             }
-        });
+        });*/
         return convertView;
     }
 
-    public void settingsRating(String rating_to_settings,View convert) {
+    /*public void settingsRating(String rating_to_settings,View convert) {
 
         rating_1 = (ImageView) convert.findViewById(R.id.rating_1);
         rating_2 = (ImageView) convert.findViewById(R.id.rating_2);
@@ -259,5 +259,5 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         });
         //Log.d(MainActivity.LOG_TAG,ITOG_RATING+"");
         return ITOG_RATING+"";
-    }
+    }*/
 }

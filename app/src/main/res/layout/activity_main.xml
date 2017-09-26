@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_2"
     android:orientation="vertical"
     tools:context="com.bingerdranch.android.bestautoservice.MainActivity">
         <TableRow
@@ -20,7 +19,6 @@
                 android:layout_height="wrap_content" />
         </TableRow>
     <ListView
-        android:dividerHeight="10sp"
         android:layout_margin="10sp"
         android:id="@+id/list_view"
         android:layout_weight="1"

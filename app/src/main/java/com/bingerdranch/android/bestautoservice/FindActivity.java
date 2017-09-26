@@ -62,7 +62,6 @@ public class FindActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private Autoservice autoservice;
     private ChildEventListener mChildEventListeber;
-    private CustomAdapter customAdapter;
 
     private LinearLayout container;
 

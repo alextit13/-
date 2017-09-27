@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class Item extends AppCompatActivity {
 
@@ -36,6 +40,8 @@ public class Item extends AppCompatActivity {
     private String vid_rabot = "";
     private String otzivi = "";
 
+    private Autoservice autoservice;
+
     private double X;
     private double Y;
 
@@ -45,8 +51,8 @@ public class Item extends AppCompatActivity {
         setContentView(R.layout.activity_item);
 
         tv_name = (TextView)findViewById(R.id.name);
-        tv_marka = (TextView)findViewById(R.id.marka);
-        tv_model = (TextView)findViewById(R.id.model);
+        tv_marka = (TextView)findViewById(R.id.markas);
+        tv_model = (TextView)findViewById(R.id.models);
         tv_okrug = (TextView)findViewById(R.id.okrug);
         tv_rayon = (TextView)findViewById(R.id.rayon);
         tv_metro = (TextView)findViewById(R.id.metro);
@@ -57,26 +63,19 @@ public class Item extends AppCompatActivity {
         button_open_the_map = (Button) findViewById(R.id.button_open_the_map);
 
         Intent intent = getIntent();
-        name = intent.getStringExtra("name");
-        marka = intent.getStringExtra("marka");
-        model = intent.getStringExtra("model");
-        okrug = intent.getStringExtra("okrug");
-        rayon = intent.getStringExtra("rayon");
-        metro = intent.getStringExtra("metro");
-        adress = intent.getStringExtra("adress");
-        number = intent.getStringExtra("number");
-        vid_rabot = intent.getStringExtra("vid_rabot");
-        otzivi = intent.getStringExtra("otzivi");
+        autoservice = (Autoservice) intent.getSerializableExtra("list");
 
-        tv_name.setText(name);
-        tv_marka.setText(marka);
-        tv_model.setText(model);
-        tv_okrug.setText(okrug);
-        tv_rayon.setText(rayon);
-        tv_metro.setText(metro);
-        tv_adress.setText(adress);
-        tv_number.setText(number);
-        tv_vid_rabot.setText(vid_rabot);
+        Log.d(MainActivity.LOG_TAG,"list.get(item) = "+autoservice.getMarka());
+
+        tv_name.setText(autoservice.getName());
+        tv_marka.setText(autoservice.getMarka());
+        tv_model.setText(autoservice.getModel());
+        tv_okrug.setText(autoservice.getOkrug());
+        tv_rayon.setText(autoservice.getRayon());
+        tv_metro.setText(autoservice.getMetro());
+        tv_adress.setText(autoservice.getAdress());
+        tv_number.setText(autoservice.getNumber());
+        tv_vid_rabot.setText(autoservice.getVid_rabot());
 
         otzivi = otzivi.replaceAll("null","");
         tv_otzivi.setText(otzivi);
@@ -85,8 +84,8 @@ public class Item extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(Item.this,MapsActivity.class);
-                intent1.putExtra("adress",adress);
-                intent1.putExtra("name",name);
+                intent1.putExtra("adress",autoservice.getAdress());
+                intent1.putExtra("name",autoservice.getName());
                 startActivity(intent1);
             }
         });

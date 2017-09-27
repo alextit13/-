@@ -17,12 +17,12 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:parentActivityName=".FindActivity">
 
         </activity>
         <activity
-            android:name=".Item"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Item" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -42,9 +42,7 @@
 
         </activity>
         <activity
-            android:name=".FindActivity"
-            android:parentActivityName=".MainActivity">
-
+            android:name=".FindActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

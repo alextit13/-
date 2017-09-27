@@ -26,4 +26,5 @@
     <string name="search_autoservices_button_text">Найти автосервисы</string>
     <string name="find_button_text">Найти</string>
     <string name="text_find">Поиск автосервиса</string>
+    <string name="title_activity_item">Item</string>
 </resources>

@@ -14,7 +14,7 @@
     <string name="main">Best Autoservices</string>
     <string name="text_marka">Марка авто</string>
     <string name="text_model">Модели авто</string>
-    <string name="text_okrug">Округ</string>
+    <string name="text_okrug">Город</string>
     <string name="text_rayon">Район</string>
     <string name="text_otzivi">Отзывы:</string>
     <string name="add_otziv">Добавить отзыв + </string>
@@ -30,4 +30,5 @@
     <string name="add_otziv_2">Добавить отзыв</string>
     <string name="rating">Выбрать рейтинг:</string>
     <string name="add_otziv_hint">Введите текст</string>
+    <string name="grafik_raboti">График работы</string>
 </resources>

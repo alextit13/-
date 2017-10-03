@@ -1,6 +1,9 @@
 package com.bingerdranch.android.bestautoservice;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +40,7 @@ public class Item extends AppCompatActivity {
     private TextView tv_number;
     private TextView tv_vid_rabot;
     private TextView tv_otzivi;
+    private TextView tv_grafik_raboti;
     private Button button_open_the_map;
     private TextView text_view_add_otziv;
     private String otzivi = "";
@@ -52,7 +57,6 @@ public class Item extends AppCompatActivity {
 
     private double X;
     private double Y;
-
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -72,6 +76,8 @@ public class Item extends AppCompatActivity {
         tv_number = (TextView)findViewById(R.id.nomer);
         tv_vid_rabot =(TextView)findViewById(R.id.vid_rabot);
         tv_otzivi = (TextView)findViewById(R.id.otzivi_item);
+        tv_grafik_raboti = (TextView)findViewById(R.id.grafik_raboti);
+
         button_open_the_map = (Button) findViewById(R.id.button_open_the_map);
         text_view_add_otziv = (TextView) findViewById(R.id.text_view_add_otziv);
         item_container = (LinearLayout)findViewById(R.id.item_container);
@@ -99,6 +105,7 @@ public class Item extends AppCompatActivity {
         tv_adress.setText(autoservice.getAdress());
         tv_number.setText(autoservice.getNumber());
         tv_vid_rabot.setText(autoservice.getVid_rabot());
+        tv_grafik_raboti.setText(autoservice.getGrafik_raboti());
 
         tv_otzivi.setText(autoservice.getOtzivi());
 
@@ -121,6 +128,20 @@ public class Item extends AppCompatActivity {
                 addOtziv();
             }
         });
+
+        tv_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickOnPhoneNumber();
+            }
+        });
+    }
+
+    private void clickOnPhoneNumber() {
+        ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("label",tv_number.getText().toString());
+        manager.setPrimaryClip(clip);
+        Toast.makeText(Item.this,"Номер скопирован!",Toast.LENGTH_SHORT).show();
     }
 
     private void setRatingZv(int rating) {

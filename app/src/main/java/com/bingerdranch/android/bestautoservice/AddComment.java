@@ -39,8 +39,6 @@ public class AddComment extends AppCompatActivity {
     private String old_numOfRating = "";
 
     private ArrayList<Integer>array_num_of_rating; // тут весь рейтинг за все время
-    private int num_of_rating;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -339,6 +339,10 @@ public class FindActivity extends AppCompatActivity {
             }
         }
 
+
+
+
+
         HashSet<Autoservice> hashAutoservices = new HashSet<>();
         hashAutoservices.addAll(find_list_autoservices);
         find_list_autoservices.clear();

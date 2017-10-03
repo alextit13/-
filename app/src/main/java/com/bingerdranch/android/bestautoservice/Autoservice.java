@@ -24,6 +24,7 @@ public class Autoservice implements Serializable{
     private String vid_rabot;
     private String otzivi;
     private int rating;
+    private String grafik_raboti;
     private double X;
     private double Y;
     private String numOfRating;
@@ -35,7 +36,7 @@ public class Autoservice implements Serializable{
     public Autoservice() {
     }
 
-    public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating) {
+    public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating, String grafik_raboti) {
         this.name = name;
         this.marka = marka;
         this.model = model;
@@ -48,6 +49,7 @@ public class Autoservice implements Serializable{
         this.otzivi = otzivi;
         this.rating = rating;
         this.numOfRating = numOfRating;
+        this.grafik_raboti = grafik_raboti;
     }
 
     protected Autoservice(Parcel in) {
@@ -65,6 +67,7 @@ public class Autoservice implements Serializable{
         X = in.readDouble();
         Y = in.readDouble();
         numOfRating = in.readString();
+        grafik_raboti = in.readString();
     }
 
     public String getName() {
@@ -161,5 +164,13 @@ public class Autoservice implements Serializable{
 
     public void setNumOfRating(String numOfRating) {
         this.numOfRating = numOfRating;
+    }
+
+    public String getGrafik_raboti() {
+        return grafik_raboti;
+    }
+
+    public void setGrafik_raboti(String grafik_raboti) {
+        this.grafik_raboti = grafik_raboti;
     }
 }

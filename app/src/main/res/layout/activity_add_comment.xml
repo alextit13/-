@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_margin="5sp"
+    android:background="@drawable/shape_item_4"
+    android:padding="10sp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bingerdranch.android.bestautoservice.AddComment">
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:text="@string/add_otziv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edit_text_otziv"
+            android:hint="@string/add_otziv_hint"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/spinner_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Spinner>
+        </TableRow>
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="@string/cast_tracks_chooser_dialog_ok"
+                android:id="@+id/button_add_otziv_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:text="@string/cast_tracks_chooser_dialog_cancel"
+                android:id="@+id/button_add_otziv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+    </LinearLayout>
+</FrameLayout>

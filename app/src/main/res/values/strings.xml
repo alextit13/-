@@ -17,7 +17,7 @@
     <string name="text_okrug">Округ</string>
     <string name="text_rayon">Район</string>
     <string name="text_otzivi">Отзывы:</string>
-    <string name="add_otziv">Добавить отзыв</string>
+    <string name="add_otziv">Добавить отзыв + </string>
     <string name="button_search">Поиск автосервисов</string>
     <string name="open_on_the_map">Открыть на карте</string>
     <string name="title_activity_maps">Map</string>
@@ -27,4 +27,7 @@
     <string name="find_button_text">Найти</string>
     <string name="text_find">Поиск автосервиса</string>
     <string name="title_activity_item">Item</string>
+    <string name="add_otziv_2">Добавить отзыв</string>
+    <string name="rating">Выбрать рейтинг:</string>
+    <string name="add_otziv_hint">Введите текст</string>
 </resources>

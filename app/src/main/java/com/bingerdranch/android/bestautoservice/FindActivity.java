@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -57,17 +58,14 @@ public class FindActivity extends AppCompatActivity {
     private String rayon = "";
     private String metro = "";
     private String vid_rabot = "";
-
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Autoservice autoservice;
     private ChildEventListener mChildEventListeber;
-
     private LinearLayout container;
-
     private long countListData = 0;
-
     private ArrayList<Autoservice> find_list_autoservices;
+    private ImageView show_all_autoservices_location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +105,15 @@ public class FindActivity extends AppCompatActivity {
         });
         progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
         progress_bar.setVisibility(View.VISIBLE);
+        find_button.setEnabled(false);
+
+        show_all_autoservices_location = (ImageView) findViewById(R.id.show_all_autoservices_location);
+        show_all_autoservices_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAllAutoserviceOnTheMap();
+            }
+        });
     }
 
     private void downloadData() {
@@ -125,11 +132,12 @@ public class FindActivity extends AppCompatActivity {
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                             autoservice = dataSnapshot.getValue(Autoservice.class);
                             list.add(autoservice);
-                            //Log.d(MainActivity.LOG_TAG,"countListData = "+ countListData);
+                            //Log.d(MainActivity.LOG_TAG,"countListData = "+ autoservice.getRating());
                             if (list.size()==countListData){
                                 confirmList();
                                 progress_bar.setVisibility(View.GONE);
                                 container.setAlpha(1f);
+                                find_button.setEnabled(true);
                             }
                         }
 
@@ -298,7 +306,6 @@ public class FindActivity extends AppCompatActivity {
         sp_6.setAdapter(adapter_vid_rabot);
     }
 
-
     // ниже расположен стек поисковой логики
 
     private void findLogic() {
@@ -339,6 +346,12 @@ public class FindActivity extends AppCompatActivity {
 
         Intent intent = new Intent(FindActivity.this,MainActivity.class);
         intent.putExtra("list",find_list_autoservices);
+        startActivity(intent);
+    }
+
+    private void showAllAutoserviceOnTheMap() {
+        Intent intent = new Intent(FindActivity.this,MapsActivity.class);
+        intent.putExtra("list",list);
         startActivity(intent);
     }
 }

@@ -23,10 +23,10 @@ public class Autoservice implements Serializable{
     private String adress;
     private String vid_rabot;
     private String otzivi;
-    private String reiting;
+    private int rating;
     private double X;
     private double Y;
-    private int numOfRating;
+    private String numOfRating;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -35,7 +35,7 @@ public class Autoservice implements Serializable{
     public Autoservice() {
     }
 
-    public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, String reiting, int numOfRating) {
+    public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating) {
         this.name = name;
         this.marka = marka;
         this.model = model;
@@ -46,7 +46,7 @@ public class Autoservice implements Serializable{
         this.adress = adress;
         this.vid_rabot = vid_rabot;
         this.otzivi = otzivi;
-        this.reiting = reiting;
+        this.rating = rating;
         this.numOfRating = numOfRating;
     }
 
@@ -61,10 +61,10 @@ public class Autoservice implements Serializable{
         adress = in.readString();
         vid_rabot = in.readString();
         otzivi = in.readString();
-        reiting = in.readString();
+        rating = in.readInt();
         X = in.readDouble();
         Y = in.readDouble();
-        numOfRating = in.readInt();
+        numOfRating = in.readString();
     }
 
     public String getName() {
@@ -147,19 +147,19 @@ public class Autoservice implements Serializable{
         this.otzivi = otzivi;
     }
 
-    public String getReiting() {
-        return reiting;
+    public int getRating() {
+        return rating;
     }
 
-    public void setReiting(String reiting) {
-        this.reiting = reiting;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
-    public int getNumOfRating() {
+    public String getNumOfRating() {
         return numOfRating;
     }
 
-    public void setNumOfRating(int numOfRating) {
+    public void setNumOfRating(String numOfRating) {
         this.numOfRating = numOfRating;
     }
 }

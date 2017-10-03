@@ -14,17 +14,11 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     public static final String LOG_TAG = "MyLogs";
     private ListView list_view;
-
     private ArrayList<Autoservice>list;// тут находятся все автосервисы, которые отобрались по параметрам поиска
-
     private ArrayList<String> list_marka;
-
     private CustomAdapter adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void clickItem(int position) {
         Intent intent = new Intent(MainActivity.this,Item.class);
-
         intent.putExtra("list",list.get(position));
-
         startActivity(intent);
     }
 }

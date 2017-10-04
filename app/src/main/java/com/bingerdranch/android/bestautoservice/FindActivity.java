@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class FindActivity extends AppCompatActivity {
 
@@ -176,12 +178,24 @@ public class FindActivity extends AppCompatActivity {
 
         for (int i = 0; i<list.size();i++){
             //Log.d(MainActivity.LOG_TAG,"list = "+ list.get(i).getName());
+            list_marka.add("ВСЕ");
             list_marka.add(list.get(i).getMarka());
+
+            list_model.add("ВСЕ");
             list_model.add(list.get(i).getModel());
+
+            list_okrug.add("Любой город");
             list_okrug.add(list.get(i).getOkrug());
+
+            list_rayon.add("Любой район");
             list_rayon.add(list.get(i).getRayon());
+
+            list_metro.add("Все станции метро");
             list_metro.add(list.get(i).getMetro());
+
+            list_vid_rabot.add("ВСЕ");
             list_vid_rabot.add(list.get(i).getVid_rabot());
+
         }
 
         HashSet<String> hash_okrug = new HashSet<>();
@@ -315,15 +329,13 @@ public class FindActivity extends AppCompatActivity {
         rayon = sp_4.getSelectedItem().toString();
         metro = sp_5.getSelectedItem().toString();
         vid_rabot = sp_6.getSelectedItem().toString();
-
         generatorFindList();
-
-
     }
 
     private void generatorFindList() {
 
         find_list_autoservices = new ArrayList<>();
+
 
         for (int i = 0;i<list.size();i++){
             if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
@@ -336,13 +348,16 @@ public class FindActivity extends AppCompatActivity {
             }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
                     list.get(i).getVid_rabot().contains(vid_rabot)){
                 find_list_autoservices.add(list.get(i));
+            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)){
+                find_list_autoservices.add(list.get(i));
+            }else if (list.get(i).getMarka().contains(marka)&&sp_2.getSelectedItem().equals("ВСЕ")){
+                find_list_autoservices.add(list.get(i));
             }
         }
-
-
-
-
-
+        if (marka.contains("ВСЕ")&&model.contains("ВСЕ")&&okrug.contains("Любой город")&&
+                rayon.contains("Любой район")&&metro.contains("Все станции метро")&&vid_rabot.contains("ВСЕ")){
+            find_list_autoservices = list;
+        }
         HashSet<Autoservice> hashAutoservices = new HashSet<>();
         hashAutoservices.addAll(find_list_autoservices);
         find_list_autoservices.clear();

@@ -1,177 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="#414141"
-    android:id="@+id/container"
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.bingerdranch.android.bestautoservice.FindActivity">
-    <ProgressBar
-        android:id="@+id/progress_bar"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+    <include
+        layout="@layout/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ScrollView
-        android:background="@drawable/shape"
-        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_item_2"
-                    android:text="@string/text_find"
-                    android:textAlignment="center"
-                    android:textColor="#000235"
-                    android:textSize="20sp"
-                    android:layout_margin="10sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:id="@+id/show_all_autoservices_location"
-                    android:layout_gravity="center"
-                    android:layout_margin="5sp"
-                    android:layout_weight="10"
-                    android:src="@drawable/ic_location_on_black_24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </TableRow>
-
-            <LinearLayout
-                android:background="@drawable/shape_item_4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="Марка"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_gravity="start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:id="@+id/sp_1"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
-            <LinearLayout
-                android:background="@drawable/shape_item_4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="start"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="Модель"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:id="@+id/sp_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
-            <LinearLayout
-                android:background="@drawable/shape_item_4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="start"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="Город"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:id="@+id/sp_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
-            <LinearLayout
-                android:background="@drawable/shape_item_4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="start"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="Район"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:id="@+id/sp_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
-            <LinearLayout
-               android:background="@drawable/shape_item_4"
-               android:orientation="vertical"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <TextView
-                   android:layout_gravity="start"
-                   android:textColor="#000000"
-                   android:textStyle="bold"
-                   android:textAlignment="center"
-                   android:text="Метро"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
-               <Spinner
-                   style="@style/Widget.AppCompat.Spinner.Underlined"
-                   android:id="@+id/sp_5"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </Spinner>
-           </LinearLayout>
-            <LinearLayout
-                android:background="@drawable/shape_item_4"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="start"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="Вид работ"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:id="@+id/sp_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-    <Button
-        android:layout_weight="0"
-        android:text="@string/find_button_text"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:id="@+id/button_find"
-        android:layout_margin="2sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_menu_drawer">
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

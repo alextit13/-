@@ -1,11 +1,17 @@
 package com.bingerdranch.android.bestautoservice;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,13 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
-public class FindActivity extends AppCompatActivity {
+public class FindActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ArrayList<Autoservice> list;
     private Button find_button;
@@ -68,6 +71,7 @@ public class FindActivity extends AppCompatActivity {
     private long countListData = 0;
     private ArrayList<Autoservice> find_list_autoservices;
     private ImageView show_all_autoservices_location;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,43 @@ public class FindActivity extends AppCompatActivity {
         downloadData();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.invite_friends:
+                //тут открываем вайбер и приглашаем друзей
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://yadi.sk/d/Q2b5cPeS3NUwRY");
+                sharingIntent.setPackage("com.viber.voip");
+                startActivity(sharingIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void init() {
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar_swipe);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         list = new ArrayList<>();
 
@@ -113,6 +153,7 @@ public class FindActivity extends AppCompatActivity {
         show_all_autoservices_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 showAllAutoserviceOnTheMap();
             }
         });
@@ -336,7 +377,6 @@ public class FindActivity extends AppCompatActivity {
 
         find_list_autoservices = new ArrayList<>();
 
-
         for (int i = 0;i<list.size();i++){
             if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
                     list.get(i).getOkrug().contains(okrug)&&list.get(i).getRayon().contains(rayon)&&
@@ -358,6 +398,8 @@ public class FindActivity extends AppCompatActivity {
                 rayon.contains("Любой район")&&metro.contains("Все станции метро")&&vid_rabot.contains("ВСЕ")){
             find_list_autoservices = list;
         }
+
+
         HashSet<Autoservice> hashAutoservices = new HashSet<>();
         hashAutoservices.addAll(find_list_autoservices);
         find_list_autoservices.clear();
@@ -372,5 +414,19 @@ public class FindActivity extends AppCompatActivity {
         Intent intent = new Intent(FindActivity.this,MapsActivity.class);
         intent.putExtra("list",list);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.idItem1){
+            Toast.makeText(FindActivity.this,"Открыта первая вкладка",Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.idItem1){
+            Toast.makeText(FindActivity.this,"Открыта вторая вкладка",Toast.LENGTH_SHORT).show();
+        }
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

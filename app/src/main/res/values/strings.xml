@@ -31,4 +31,7 @@
     <string name="rating">Выбрать рейтинг:</string>
     <string name="add_otziv_hint">Введите текст</string>
     <string name="grafik_raboti">График работы</string>
+    <string name="inviteFriends">Пригласить друзей</string>
+    <string name="navigation_drawer_open">drawer_open</string>
+    <string name="navigation_drawer_close">driver_close</string>
 </resources>

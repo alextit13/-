@@ -9,7 +9,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +20,7 @@
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".FindActivity">
-
-        </activity>
+            android:parentActivityName=".FindActivity" />
         <activity android:name=".Item" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -39,9 +37,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".Item">
-
-        </activity>
+            android:parentActivityName=".Item" />
         <activity android:name=".FindActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,11 +45,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddComment"
+        <activity
+            android:name=".AddComment"
             android:parentActivityName=".Item"
-            android:theme="@style/Base.Theme.AppCompat.Dialog">
-
-        </activity>
+            android:theme="@style/Base.Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".AboutApplication"
+            android:parentActivityName=".FindActivity" />
+        <activity android:name=".HowFinds"></activity>
     </application>
 
 </manifest>

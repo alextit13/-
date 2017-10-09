@@ -34,4 +34,8 @@
     <string name="inviteFriends">Пригласить друзей</string>
     <string name="navigation_drawer_open">drawer_open</string>
     <string name="navigation_drawer_close">driver_close</string>
+    <string name="about_app_main_text">О приложении</string>
+    <string name="about_app">v 1.0 \n Поиск и информация об автосервисах</string>
+    <string name="how_find_main_text">Как искать</string>
+    <string name="how_find">Поиск осуществляется по одному либо нескольким парметрам. Доступен поиск по карте. Для отображения всех автосервисов на карте нажмите не значке локации на главном экране приложения. После выбора интересующих Вас парметров нажмите кнопку поиска внизу экрана.</string>
 </resources>

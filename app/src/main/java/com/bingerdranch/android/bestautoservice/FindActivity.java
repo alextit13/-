@@ -419,11 +419,12 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.idItem1){
-            Toast.makeText(FindActivity.this,"Открыта первая вкладка",Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.idItem1){
-            Toast.makeText(FindActivity.this,"Открыта вторая вкладка",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(FindActivity.this,AboutApplication.class);
+            startActivity(intent);
+        }else if (id == R.id.idItem2){
+            Intent intent = new Intent(FindActivity.this,HowFinds.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

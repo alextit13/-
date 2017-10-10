@@ -94,7 +94,7 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
                 //тут открываем вайбер и приглашаем друзей
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://yadi.sk/d/Q2b5cPeS3NUwRY");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://drive.google.com/open?id=0B48Ww41KBPMPaFc3cWI0bFFJdFE");
                 sharingIntent.setPackage("com.viber.voip");
                 startActivity(sharingIntent);
                 return true;

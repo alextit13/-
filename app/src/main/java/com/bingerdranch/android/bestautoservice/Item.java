@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class Item extends AppCompatActivity {
 
+    private TextView site_text_view;
     private TextView tv_name;
     private TextView tv_marka;
     private TextView tv_model;
@@ -66,6 +68,7 @@ public class Item extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
+        site_text_view = (TextView) findViewById(R.id.site_text_view);
         tv_name = (TextView)findViewById(R.id.name);
         tv_marka = (TextView)findViewById(R.id.markas);
         tv_model = (TextView)findViewById(R.id.models);
@@ -93,7 +96,7 @@ public class Item extends AppCompatActivity {
 
         Intent intent = getIntent();
         autoservice = (Autoservice) intent.getSerializableExtra("list");
-        //Log.d(MainActivity.LOG_TAG,"autoservice = " + autoservice.getRating());
+
         setRatingZv(autoservice.getRating());
 
         tv_name.setText(autoservice.getName());
@@ -106,6 +109,22 @@ public class Item extends AppCompatActivity {
         tv_number.setText(autoservice.getNumber());
         tv_vid_rabot.setText(autoservice.getVid_rabot());
         tv_grafik_raboti.setText(autoservice.getGrafik_raboti());
+        if (autoservice.getSite()!=null
+                &&!autoservice.getSite().equals("")){
+            site_text_view.setText(autoservice.getSite());
+            site_text_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = site_text_view.getText().toString();
+                    if (!url.startsWith("http://") && !url.startsWith("https://"))
+                        url = "http://" + url;
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(browserIntent);
+                }
+            });
+        }else{
+            site_text_view.setVisibility(View.INVISIBLE);
+        }
 
         tv_otzivi.setText(autoservice.getOtzivi());
 
@@ -117,6 +136,7 @@ public class Item extends AppCompatActivity {
 
                 item_container.setAlpha(0.3f);
                 Intent intent1 = new Intent(Item.this,MapsActivity.class);
+                intent1.putExtra("autoservice",autoservice);
                 intent1.putExtra("adress",autoservice.getAdress());
                 intent1.putExtra("name",autoservice.getName());
                 startActivity(intent1);
@@ -185,7 +205,6 @@ public class Item extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        Log.d(MainActivity.LOG_TAG,"start");
         button_open_the_map.setEnabled(true);
         item_container.setAlpha(1f);
         super.onStart();

@@ -28,6 +28,7 @@ public class Autoservice implements Serializable{
     private double X;
     private double Y;
     private String numOfRating;
+    private String site;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -37,6 +38,23 @@ public class Autoservice implements Serializable{
     }
 
     public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating, String grafik_raboti) {
+        this.name = name;
+        this.marka = marka;
+        this.model = model;
+        this.number = number;
+        this.okrug = okrug;
+        this.rayon = rayon;
+        this.metro = metro;
+        this.adress = adress;
+        this.vid_rabot = vid_rabot;
+        this.otzivi = otzivi;
+        this.rating = rating;
+        this.numOfRating = numOfRating;
+        this.grafik_raboti = grafik_raboti;
+    }
+
+    public Autoservice(String site, String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating, String grafik_raboti) {
+        this.site = site;
         this.name = name;
         this.marka = marka;
         this.model = model;
@@ -68,6 +86,14 @@ public class Autoservice implements Serializable{
         Y = in.readDouble();
         numOfRating = in.readString();
         grafik_raboti = in.readString();
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public String getName() {

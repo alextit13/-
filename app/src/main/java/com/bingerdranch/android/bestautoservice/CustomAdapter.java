@@ -69,7 +69,6 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         setMarka(autoservice.getMarka());
         setNumOfRatingSize(autoservice.getNumOfRating().length());
 
-        Log.d(MainActivity.LOG_TAG,"numOfRating size = " + autoservice.getNumOfRating().length());
 
         tv_name.setText(autoservice.getName());
         adress.setText(autoservice.getAdress());

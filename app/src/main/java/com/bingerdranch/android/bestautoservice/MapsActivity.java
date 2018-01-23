@@ -36,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String name;
     private double X;
     private double Y;
+    private Autoservice autoservice;
 
     private ArrayList<Autoservice>list;
 
@@ -50,15 +51,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         adress = intent.getStringExtra("adress");
         name = intent.getStringExtra("name");
+        autoservice = (Autoservice)intent.getSerializableExtra("autoservice");
 
         list = new ArrayList<>();
 
 
         list = (ArrayList<Autoservice>) intent.getSerializableExtra("list");
 
-        //Log.d(MainActivity.LOG_TAG,name);
-        //Log.d(MainActivity.LOG_TAG,adress);
-        //Log.d(MainActivity.LOG_TAG,list.size()+"");
     }
 
     @Override
@@ -78,7 +77,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 e.printStackTrace();
             }
             LatLng object = new LatLng(X, Y);
-            //Log.d(MainActivity.LOG_TAG,"coordinates = " + X + " | " + Y);
 
             mMap.getUiSettings().setZoomControlsEnabled(true);
             mMap.addMarker(new MarkerOptions().position(object).title(name));
@@ -91,15 +89,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 List<Address> addresses;
                 try {
                     addresses = geocoder.getFromLocationName(list.get(i).getAdress(), 1);
+                    Log.d(MainActivity.LOG_TAG,"adresses = " + addresses);
                     if (addresses.size() > 0) {
                         X = addresses.get(0).getLatitude();
                         Y = addresses.get(0).getLongitude();
                     }
                 } catch (IOException e) {
+                    Log.d(MainActivity.LOG_TAG,"e = " + e);
                     e.printStackTrace();
                 }
                 LatLng object = new LatLng(X, Y);
-                //Log.d(MainActivity.LOG_TAG,"coordinates = " + X + " | " + Y);
+
 
                 mMap.getUiSettings().setZoomControlsEnabled(true);
                 mMap.addMarker(new MarkerOptions().position(object).title(list.get(i).getName()));

@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class FindActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -94,7 +97,7 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
                 //тут открываем вайбер и приглашаем друзей
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://drive.google.com/open?id=0B48Ww41KBPMPaFc3cWI0bFFJdFE");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://yadi.sk/d/QiCyatbh3P32j6");
                 sharingIntent.setPackage("com.viber.voip");
                 startActivity(sharingIntent);
                 return true;
@@ -219,10 +222,8 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
         for (int i = 0; i<list.size();i++){
             //Log.d(MainActivity.LOG_TAG,"list = "+ list.get(i).getName());
-            list_marka.add("ВСЕ");
             list_marka.add(list.get(i).getMarka());
 
-            list_model.add("ВСЕ");
             list_model.add(list.get(i).getModel());
 
             list_okrug.add("Любой город");
@@ -234,7 +235,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
             list_metro.add("Все станции метро");
             list_metro.add(list.get(i).getMetro());
 
-            list_vid_rabot.add("ВСЕ");
             list_vid_rabot.add(list.get(i).getVid_rabot());
 
         }
@@ -256,6 +256,16 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         list_metro.addAll(hash_metro);
 
         updateAdapters();
+    }
+
+    private ArrayList<String> sortList(ArrayList<String> list) {
+        for (int i = 0; i<list.size();i++){
+            if (list.get(i).contains("ВСЕ")){
+                list.remove(i);
+            }
+        }
+        Collections.sort(list);
+        return list;
     }
 
     private void updateAdapters() {
@@ -342,7 +352,18 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         hash_vid_rabot.addAll(list_vid_rabot);
         list_vid_rabot.clear();
         list_vid_rabot.addAll(hash_vid_rabot);
+
+        list_marka = sortList(list_marka);
+        list_model = sortList(list_model);
+        list_vid_rabot = sortList(list_vid_rabot);
+        list_metro = sortList(list_metro);
+        list_okrug = sortList(list_okrug);
+        list_rayon = sortList(list_rayon);
+
+
         refreshAdapter();
+
+
     }
 
     private void refreshAdapter() {
@@ -377,26 +398,21 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
         find_list_autoservices = new ArrayList<>();
 
-        for (int i = 0;i<list.size();i++){
-            if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
-                    list.get(i).getOkrug().contains(okrug)&&list.get(i).getRayon().contains(rayon)&&
-                    list.get(i).getVid_rabot().contains(vid_rabot)){
-                find_list_autoservices.add(list.get(i));
-            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
-                    list.get(i).getRayon().contains(rayon)&& list.get(i).getVid_rabot().contains(vid_rabot)){
-                find_list_autoservices.add(list.get(i));
-            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)&&
-                    list.get(i).getVid_rabot().contains(vid_rabot)){
-                find_list_autoservices.add(list.get(i));
-            }else if (list.get(i).getMarka().contains(marka)&&list.get(i).getModel().contains(model)){
-                find_list_autoservices.add(list.get(i));
-            }else if (list.get(i).getMarka().contains(marka)&&sp_2.getSelectedItem().equals("ВСЕ")){
-                find_list_autoservices.add(list.get(i));
+
+        for(int i = 0; i<list.size();i++){
+            if (list.get(i).getMarka().contains(marka)||marka.contains("ВСЕ")){
+                if (list.get(i).getModel().contains(model)||model.contains("ВСЕ")){
+                    if (list.get(i).getOkrug().contains(okrug)||okrug.contains("Любой город")){
+                        if (list.get(i).getRayon().contains(rayon)||rayon.contains("Любой район")){
+                            if (list.get(i).getMetro().contains(metro)||metro.contains("се станции метро")){
+                                if (list.get(i).getVid_rabot().contains(vid_rabot)||vid_rabot.contains("ВСЕ")){
+                                    find_list_autoservices.add(list.get(i));
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
-        if (marka.contains("ВСЕ")&&model.contains("ВСЕ")&&okrug.contains("Любой город")&&
-                rayon.contains("Любой район")&&metro.contains("Все станции метро")&&vid_rabot.contains("ВСЕ")){
-            find_list_autoservices = list;
         }
 
 

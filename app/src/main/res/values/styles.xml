@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,6 +16,16 @@
     <style name="ThemeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#fff</item>
         <item name="android:textColorSecondary">@color/main_green</item>
+    </style>
+
+    <style name="my_rating_bar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignStart">@+id/text_name</item>
+        <item name="android:layout_marginTop">128dp</item>
+        <item name="android:rating">4</item>
+        <item name="android:progressTint" tools:targetApi="lollipop">#ffe414</item>
     </style>
 
 </resources>

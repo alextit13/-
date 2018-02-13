@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i<list.size();i++){
             list_marka.add(list.get(i).getMarka());
         }
-        adapter = new CustomAdapter(this,R.layout.item_adapter,list);
+        adapter = new CustomAdapter(this,R.layout.item_adapter,list,MainActivity.this);
         list_view.setAdapter(adapter);
         list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

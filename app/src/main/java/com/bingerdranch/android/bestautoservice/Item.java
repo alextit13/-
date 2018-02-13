@@ -3,12 +3,9 @@ package com.bingerdranch.android.bestautoservice;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,18 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class Item extends AppCompatActivity {
 
@@ -75,7 +62,7 @@ public class Item extends AppCompatActivity {
         tv_okrug = (TextView)findViewById(R.id.okrug);
         tv_rayon = (TextView)findViewById(R.id.rayon);
         tv_metro = (TextView)findViewById(R.id.metro);
-        tv_adress = (TextView)findViewById(R.id.adress);
+        tv_adress = (TextView)findViewById(R.id.number_phone);
         tv_number = (TextView)findViewById(R.id.nomer);
         tv_vid_rabot =(TextView)findViewById(R.id.vid_rabot);
         tv_otzivi = (TextView)findViewById(R.id.otzivi_item);

@@ -111,7 +111,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         toolbar = (Toolbar) findViewById(R.id.toolbar_swipe);
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

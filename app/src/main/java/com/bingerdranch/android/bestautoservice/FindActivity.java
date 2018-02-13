@@ -1,6 +1,7 @@
 package com.bingerdranch.android.bestautoservice;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,8 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -73,7 +71,7 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     private LinearLayout container;
     private long countListData = 0;
     private ArrayList<Autoservice> find_list_autoservices;
-    private ImageView show_all_autoservices_location;
+    private ImageView see_autoserv_s_on_the_map;
     private Toolbar toolbar;
 
     @Override
@@ -84,31 +82,36 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         downloadData();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.invite_friends:
-                //тут открываем вайбер и приглашаем друзей
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://yadi.sk/d/QiCyatbh3P32j6");
-                sharingIntent.setPackage("com.viber.voip");
-                startActivity(sharingIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     private void init() {
 
+
+        String custom_font = "font/oswald_regular.ttf";
+        Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
+        ((TextView)findViewById(R.id.marka_tv)).setTypeface(CF);
+        ((TextView) findViewById(R.id.model_splash)).setTypeface(CF);
+        ((TextView) findViewById(R.id.city_splash)).setTypeface(CF);
+        ((TextView) findViewById(R.id.rayon_splash)).setTypeface(CF);
+        ((TextView) findViewById(R.id.metro_splash)).setTypeface(CF);
+        ((TextView) findViewById(R.id.vid_rabot_splash)).setTypeface(CF);
+
+        ((Button) findViewById(R.id.button_cancel)).setTypeface(CF);
+        ((Button) findViewById(R.id.button_find)).setTypeface(CF);
+
+        String custom_font_amarante = "font/amarante_regular.ttf";
+        Typeface CF_amarante = Typeface.createFromAsset(getAssets(), custom_font_amarante);
+        ((TextView) findViewById(R.id.main_splash)).setTypeface(CF_amarante);
+
+
+        see_autoserv_s_on_the_map = (ImageView) findViewById(R.id.see_autoserv_s_on_the_map);
+        see_autoserv_s_on_the_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAllAutoserviceOnTheMap();
+            }
+        });
         toolbar = (Toolbar) findViewById(R.id.toolbar_swipe);
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -151,15 +154,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
         progress_bar.setVisibility(View.VISIBLE);
         find_button.setEnabled(false);
-
-        show_all_autoservices_location = (ImageView) findViewById(R.id.show_all_autoservices_location);
-        show_all_autoservices_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showAllAutoserviceOnTheMap();
-            }
-        });
     }
 
     private void downloadData() {
@@ -360,9 +354,7 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         list_okrug = sortList(list_okrug);
         list_rayon = sortList(list_rayon);
 
-
         refreshAdapter();
-
 
     }
 
@@ -441,6 +433,12 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         }else if (id == R.id.idItem2){
             Intent intent = new Intent(FindActivity.this,HowFinds.class);
             startActivity(intent);
+        }else if (id == R.id.idItem0){
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(Intent.EXTRA_TEXT,"Скачивай и устанавливай приложение BestAutoservices - все автосервисы твоего города у тебя в кармане! https://yadi.sk/d/QiCyatbh3P32j6");
+            sharingIntent.setPackage("com.viber.voip");
+            startActivity(sharingIntent);
         }
         DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

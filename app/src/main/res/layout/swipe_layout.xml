@@ -9,20 +9,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorAccent">
+            android:background="@color/main_green">
+
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_swipe"
-                android:background="?attr/colorAccent"
-                app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/main_green"
+                android:gravity="center"
+                android:theme="@style/ThemeToolbar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:subtitleTextColor="@color/main_green"
+                app:titleTextColor="@color/main_green">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingRight="-25dp">
+
+                    <TextView
+                        android:id="@+id/main_splash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="BESTAUTOSERVICES"
+                        android:textColor="#fff"
+                        android:textSize="25sp" />
+
+                    <ImageView
+                        android:id="@+id/see_autoserv_s_on_the_map"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
+                        android:src="@drawable/map" />
+                </RelativeLayout>
+
             </android.support.v7.widget.Toolbar>
+
+
         </android.support.design.widget.AppBarLayout>
         <LinearLayout
-            android:background="#414141"
             android:id="@+id/container"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -35,167 +73,180 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ScrollView
-                android:background="@drawable/shape"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:layout_margin="4dp"
+                    android:layout_gravity="top"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_item_2"
-                            android:text="@string/text_find"
-                            android:textAlignment="center"
-                            android:textColor="#000235"
-                            android:textSize="20sp"
-                            android:layout_margin="10sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                        <ImageView
-                            android:id="@+id/show_all_autoservices_location"
-                            android:layout_gravity="center"
-                            android:layout_margin="5sp"
-                            android:layout_weight="10"
-                            android:src="@drawable/ic_location_on_black_24dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </TableRow>
 
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:textSize="18sp"
+                            android:id="@+id/marka_tv"
                             android:text="Марка"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:layout_gravity="start"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:spinnerMode="dialog"
+                            android:prompt="@string/marka"
                             android:id="@+id/sp_1"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/model_splash"
+                            android:textSize="18sp"
                             android:layout_gravity="start"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:text="Модель"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:prompt="@string/model"
+                            android:spinnerMode="dialog"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:id="@+id/sp_2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/city_splash"
+                            android:textSize="18sp"
                             android:layout_gravity="start"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:text="Город"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:prompt="@string/city"
+                            android:spinnerMode="dialog"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:id="@+id/sp_3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/rayon_splash"
+                            android:textSize="18sp"
                             android:layout_gravity="start"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:text="Район"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:prompt="@string/text_rayon"
+                            android:spinnerMode="dialog"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:id="@+id/sp_4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/metro_splash"
+                            android:textSize="18sp"
                             android:layout_gravity="start"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:text="Метро"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:prompt="@string/text_metro"
+                            android:spinnerMode="dialog"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:id="@+id/sp_5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@drawable/shape_item_4"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/vid_rabot_splash"
+                            android:textSize="18sp"
                             android:layout_gravity="start"
                             android:textColor="#000000"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:text="Вид работ"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <Spinner
+                            android:prompt="@string/vid_rabot"
+                            android:spinnerMode="dialog"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:id="@+id/sp_6"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp">
                         </Spinner>
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
-            <Button
-                android:layout_weight="0"
-                android:text="@string/find_button_text"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/button_find"
-                android:layout_margin="2sp"
+            <TableRow
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <Button
+                    android:textSize="18sp"
+                    android:background="@android:drawable/dialog_holo_light_frame"
+                    android:text="@string/cancel"
+                    android:textColor="#000000"
+                    android:id="@+id/button_cancel"
+                    android:layout_margin="2sp"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp" />
+                <Button
+                    android:textSize="18sp"
+                    android:background="@drawable/myrect"
+                    android:text="@string/find_button_text"
+                    android:textColor="#ffffff"
+                    android:id="@+id/button_find"
+                    android:layout_margin="2sp"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp" />
+            </TableRow>
+
         </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -1,6 +1,7 @@
 package com.bingerdranch.android.bestautoservice;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        ((ImageView)findViewById(R.id.back_main_list))
+                .setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        }
+                );
+
+        String custom_font = "font/amarante_regular.ttf";
+        Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
+
+        ((TextView) findViewById(R.id.main_list_toolbar_text)).setTypeface(CF);
+
         Intent intent = getIntent();
         list = (ArrayList<Autoservice>) intent.getSerializableExtra("list");
 
@@ -36,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i<list.size();i++){
             list_marka.add(list.get(i).getMarka());
         }
-        adapter = new CustomAdapter(this,R.layout.item_adapter,list,MainActivity.this);
+        adapter = new CustomAdapter(this,R.layout.test,list,MainActivity.this);
         list_view.setAdapter(adapter);
         list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

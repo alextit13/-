@@ -2,6 +2,7 @@ package com.bingerdranch.android.bestautoservice;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -33,12 +34,22 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
         convertView = ((Activity)getContext())
                 .getLayoutInflater().inflate(R.layout.test,parent,false);
 
+        String custom_font = "font/oswald_regular.ttf";
+        Typeface CF = Typeface.createFromAsset(context.getAssets(), custom_font);
+        ((TextView)convertView.findViewById(R.id.text_name)).setTypeface(CF);
+
+
+
+
+
+
         ((TextView)convertView.findViewById(R.id.text_name)).setText(autoservice.getName());
         ((TextView)convertView.findViewById(R.id.number_phone)).setText(autoservice.getNumber());
         ((TextView)convertView.findViewById(R.id.marka_t)).setText(autoservice.getMarka());
         ((TextView)convertView.findViewById(R.id.adress_t)).setText(autoservice.getAdress());
+        ((RatingBar)convertView.findViewById(R.id.ratingBar)).setRating(autoservice.getRating());
 
-        Picasso.with(context).load("https://repairpal.com/images/managed/service_location/393/117393/images/26305_full.jpg")
+        Picasso.with(context).load(R.drawable.empty_photo)
                 .into((ImageView)convertView.findViewById(R.id.image_autoservices));
 
         return convertView;

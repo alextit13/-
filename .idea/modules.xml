@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BestAutoservice.iml" filepath="$PROJECT_DIR$/.idea/BestAutoservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/BestAutoservice.iml" filepath="$PROJECT_DIR$/BestAutoservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\disk_C\ANDROID\ANDROIN_PROJECTS\Notes 2\BestAutoservice\.idea\BestAutoservice.iml" filepath="D:\disk_C\ANDROID\ANDROIN_PROJECTS\Notes 2\BestAutoservice\.idea\BestAutoservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

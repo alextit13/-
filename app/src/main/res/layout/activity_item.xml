@@ -246,6 +246,8 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:onClick="onClick"
+                    android:textStyle="bold"
                     android:id="@+id/tv_adress"
                     android:textSize="18sp"
                     android:gravity="end"
@@ -279,6 +281,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/tv_number"
                     android:textSize="18sp"
                     android:gravity="end"
@@ -321,6 +324,31 @@
                     android:layout_height="wrap_content"/>
 
             </TableRow>
+            <TableRow
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/main_green"
+                    android:textSize="18sp"
+                    android:text="@string/otzivi"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_otzivi"
+                    android:textSize="18sp"
+                    android:gravity="end"
+                    tools:text="Отзывы..."
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </TableRow>
 
         </LinearLayout>
 
@@ -347,5 +375,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progress_detail_view"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </FrameLayout>
 

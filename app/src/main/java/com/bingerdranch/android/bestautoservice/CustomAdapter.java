@@ -40,9 +40,6 @@ public class CustomAdapter extends ArrayAdapter<Autoservice> {
 
 
 
-
-
-
         ((TextView)convertView.findViewById(R.id.text_name)).setText(autoservice.getName());
         ((TextView)convertView.findViewById(R.id.number_phone)).setText(autoservice.getNumber());
         ((TextView)convertView.findViewById(R.id.marka_t)).setText(autoservice.getMarka());

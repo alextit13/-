@@ -36,7 +36,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String name;
     private double X;
     private double Y;
-    private Autoservice autoservice;
 
     private ArrayList<Autoservice>list;
 
@@ -51,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         adress = intent.getStringExtra("adress");
         name = intent.getStringExtra("name");
-        autoservice = (Autoservice)intent.getSerializableExtra("autoservice");
 
         list = new ArrayList<>();
 

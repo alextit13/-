@@ -38,7 +38,28 @@ public class Autoservice implements Serializable{
     public Autoservice() {
     }
 
-
+    public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String grafik_raboti, double x, double y, String numOfRating, String site, String image_path, FirebaseDatabase mFirebaseDatabase, DatabaseReference mDatabaseReference, ChildEventListener mChildEventListeber) {
+        this.name = name;
+        this.marka = marka;
+        this.model = model;
+        this.number = number;
+        this.okrug = okrug;
+        this.rayon = rayon;
+        this.metro = metro;
+        this.adress = adress;
+        this.vid_rabot = vid_rabot;
+        this.otzivi = otzivi;
+        this.rating = rating;
+        this.grafik_raboti = grafik_raboti;
+        X = x;
+        Y = y;
+        this.numOfRating = numOfRating;
+        this.site = site;
+        this.image_path = image_path;
+        this.mFirebaseDatabase = mFirebaseDatabase;
+        this.mDatabaseReference = mDatabaseReference;
+        this.mChildEventListeber = mChildEventListeber;
+    }
 
     public Autoservice(String name, String marka, String model, String number, String okrug, String rayon, String metro, String adress, String vid_rabot, String otzivi, int rating, String numOfRating, String grafik_raboti) {
         this.name = name;

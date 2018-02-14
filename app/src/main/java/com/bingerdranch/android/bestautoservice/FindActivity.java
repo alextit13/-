@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,18 +77,20 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Autoservice> find_list_autoservices;
     private ImageView see_autoserv_s_on_the_map;
     private Toolbar toolbar;
+    private ArrayList<String>listAdresses = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
+
         init();
         downloadData();
     }
 
 
     private void init() {
-
 
         String custom_font = "font/oswald_regular.ttf";
         Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
@@ -104,6 +110,8 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
 
         see_autoserv_s_on_the_map = (ImageView) findViewById(R.id.see_autoserv_s_on_the_map);
+        see_autoserv_s_on_the_map.setAlpha(.3f);
+        see_autoserv_s_on_the_map.setClickable(false);
         see_autoserv_s_on_the_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +164,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void downloadData() {
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -170,13 +177,18 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                             autoservice = dataSnapshot.getValue(Autoservice.class);
+
+                            //Log.d("LOG_TAG","s = " + s);
                             list.add(autoservice);
                             //Log.d(MainActivity.LOG_TAG,"countListData = "+ autoservice.getRating());
                             if (list.size()==countListData){
+                                sortListData();
                                 confirmList();
                                 progress_bar.setVisibility(View.GONE);
                                 container.setAlpha(1f);
                                 find_button.setEnabled(true);
+                                see_autoserv_s_on_the_map.setAlpha(1f);
+                                see_autoserv_s_on_the_map.setClickable(true);
                             }
                         }
 
@@ -209,6 +221,12 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+    }
+
+    private void sortListData() {
+        for (int i = 0; i<list.size();i++){
+            listAdresses.add(list.get(i).getAdress());
+        }
     }
 
     public void confirmList(){
@@ -419,7 +437,7 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
     private void showAllAutoserviceOnTheMap() {
         Intent intent = new Intent(FindActivity.this,MapsActivity.class);
-        intent.putExtra("list",list);
+        intent.putExtra("list",listAdresses);
         startActivity(intent);
     }
 

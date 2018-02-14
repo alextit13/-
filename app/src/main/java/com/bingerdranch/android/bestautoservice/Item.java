@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 public class Item extends AppCompatActivity {
 
-    private TextView site_text_view;
+    private TextView tv_site;
     private TextView tv_name, tv_marka, tv_city, tv_model, tv_rayon, tv_metro, tv_adress, tv_number, tv_vid_rabot, tv_grafik_raboti, tv_otzivi;
     private ProgressBar progress_detail_view;
     private Autoservice autoservice;
@@ -38,7 +38,6 @@ public class Item extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-
 
         String custom_font = "font/oswald_bold.ttf";
         Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
@@ -57,16 +56,21 @@ public class Item extends AppCompatActivity {
                         }
                 );
 
+        ((Button)findViewById(R.id.add_otziv))
+                .setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                addOtziv();
+                            }
+                        }
+                );
         Picasso.with(this).load("http://bobsmarket.ru/images/tehnicheskoe-obsluzhivanie.jpg")
                 .into((ImageView) findViewById(R.id.details_back));
-
-        //site_text_view = (TextView) findViewById(R.id.site_text_view);
-
         tv_otzivi = (TextView) findViewById(R.id.tv_otzivi);
         tv_name = (TextView) findViewById(R.id.name);
         tv_marka = (TextView) findViewById(R.id.tv_marka);
         tv_model = (TextView) findViewById(R.id.tv_model);
-        //tv_okrug = (TextView)findViewById(R.id.okrug);
         tv_rayon = (TextView) findViewById(R.id.tv_rayon);
         tv_metro = (TextView) findViewById(R.id.tv_metro);
         tv_adress = (TextView) findViewById(R.id.tv_adress);
@@ -74,6 +78,7 @@ public class Item extends AppCompatActivity {
         tv_vid_rabot = (TextView) findViewById(R.id.tv_vid_rabot);
         tv_grafik_raboti = (TextView) findViewById(R.id.tv_grafik_raboti);
         tv_city = (TextView) findViewById(R.id.tv_city);
+        tv_site = (TextView) findViewById(R.id.tv_site);
 
 
         database = FirebaseDatabase.getInstance();
@@ -81,6 +86,17 @@ public class Item extends AppCompatActivity {
 
         Intent intent = getIntent();
         autoservice = (Autoservice) intent.getSerializableExtra("list");
+
+        if (autoservice.getSite()!=null
+                &&!autoservice.getSite().equals("")){
+            tv_site.setText(autoservice.getSite());
+            tv_site.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToSite(tv_site.getText().toString());
+                }
+            });
+        }
 
         tv_otzivi.setText(autoservice.getOtzivi());
         tv_adress.setText(autoservice.getAdress());
@@ -95,15 +111,12 @@ public class Item extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-
-
                 int hasWriteContactsPermission = checkSelfPermission(Manifest.permission.CALL_PHONE);
                 if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
                             REQUEST_CODE_ASK_PERMISSIONS);
                     return;
                 }
-                //insertDummyContact();
                 Uri uri_number = Uri.parse("tel:" + autoservice.getNumber()+"");
                 Intent intent_phone = new Intent(Intent.ACTION_CALL, uri_number);
                 startActivity(intent_phone);
@@ -111,20 +124,13 @@ public class Item extends AppCompatActivity {
         });
         tv_vid_rabot.setText(autoservice.getVid_rabot());
         tv_grafik_raboti.setText(autoservice.getGrafik_raboti());
-        if (autoservice.getSite() != null
-                && !autoservice.getSite().equals("")) {
-            site_text_view.setText(autoservice.getSite());
-            site_text_view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String url = site_text_view.getText().toString();
-                    if (!url.startsWith("http://") && !url.startsWith("https://"))
-                        url = "http://" + url;
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(browserIntent);
-                }
-            });
-        }
+    }
+
+    private void goToSite(String s) {
+        if (!s.startsWith("http://") && !s.startsWith("https://"))
+            s = "http://" + s;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+        startActivity(browserIntent);
     }
 
     @Override
@@ -158,20 +164,9 @@ public class Item extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onStart() {
-        //button_open_the_map.setEnabled(true);
-        //item_container.setAlpha(1f);
-        super.onStart();
-    }
-
     public void onClick(View view) {
         // do call with number
         switch (view.getId()) {
-            case R.id.tv_number:
-                // call
-
-                break;
             case R.id.tv_adress:
                 // map
                 progress_detail_view.setVisibility(View.VISIBLE);

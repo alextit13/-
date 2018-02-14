@@ -41,4 +41,5 @@
     <string name="cancel">Очистить</string>
     <string name="city">Город</string>
     <string name="type_avto">Типы авто</string>
+    <string name="site">Сайт</string>
 </resources>

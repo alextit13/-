@@ -54,14 +54,12 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<String> list_rayon;
     private ArrayList<String> list_metro;
     private ArrayList<String> list_vid_rabot;
-
     private ArrayAdapter<String> adapter_marka;
     private ArrayAdapter<String> adapter_model;
     private ArrayAdapter<String> adapter_okrug;
     private ArrayAdapter<String> adapter_rayon;
     private ArrayAdapter<String> adapter_metro;
     private ArrayAdapter<String> adapter_vid_rabot;
-
     private String marka = "";
     private String model = "";
     private String okrug = "";
@@ -89,7 +87,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         downloadData();
     }
 
-
     private void init() {
 
         String custom_font = "font/oswald_regular.ttf";
@@ -102,6 +99,21 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         ((TextView) findViewById(R.id.vid_rabot_splash)).setTypeface(CF);
 
         ((Button) findViewById(R.id.button_cancel)).setTypeface(CF);
+        ((Button) findViewById(R.id.button_cancel)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sp_1.setSelection(0);
+                        sp_2.setSelection(0);
+                        sp_3.setSelection(0);
+                        sp_4.setSelection(0);
+                        sp_5.setSelection(0);
+                        sp_6.setSelection(0);
+                    }
+                }
+        );
+
+
         ((Button) findViewById(R.id.button_find)).setTypeface(CF);
 
         String custom_font_amarante = "font/amarante_regular.ttf";
@@ -230,24 +242,13 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void confirmList(){
-
         for (int i = 0; i<list.size();i++){
-            //Log.d(MainActivity.LOG_TAG,"list = "+ list.get(i).getName());
             list_marka.add(list.get(i).getMarka());
-
             list_model.add(list.get(i).getModel());
-
-            list_okrug.add("Любой город");
             list_okrug.add(list.get(i).getOkrug());
-
-            list_rayon.add("Любой район");
             list_rayon.add(list.get(i).getRayon());
-
-            list_metro.add("Все станции метро");
             list_metro.add(list.get(i).getMetro());
-
             list_vid_rabot.add(list.get(i).getVid_rabot());
-
         }
 
         HashSet<String> hash_okrug = new HashSet<>();
@@ -391,8 +392,6 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
         sp_6.setAdapter(adapter_vid_rabot);
     }
 
-    // ниже расположен стек поисковой логики
-
     private void findLogic() {
         marka = sp_1.getSelectedItem().toString();
         model = sp_2.getSelectedItem().toString();
@@ -437,7 +436,8 @@ public class FindActivity extends AppCompatActivity implements NavigationView.On
 
     private void showAllAutoserviceOnTheMap() {
         Intent intent = new Intent(FindActivity.this,MapsActivity.class);
-        intent.putExtra("list",listAdresses);
+        intent.putExtra("list",list);
+        intent.putExtra("listAdresses",listAdresses);
         startActivity(intent);
     }
 

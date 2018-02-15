@@ -15,9 +15,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"
@@ -49,8 +49,12 @@
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity
             android:name=".AboutApplication"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".FindActivity" />
-        <activity android:name=".HowFinds"></activity>
+        <activity android:name=".HowFinds"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
